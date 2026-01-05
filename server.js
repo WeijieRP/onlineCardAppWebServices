@@ -40,11 +40,10 @@ app.post("/addcard", async(req ,res)=>{
     const {card_name , card_pic} = req.body;
     try{
         let connection = await mysql.createConnection(dbConfig);
-        await connection.execute("INSERT INTO cards(card_name , card_pic) VALUES(?,?)", [card_name , card_pic]);
+        await connection.execute("INSERT INTO cards (card_name , card_pic) VALUES(?,?)", [card_name , card_pic]);
         res.status(201).json({message:"Card"+ card_name +"added sucessfully"});
     }catch(err){
         console.error(err);
         res.status(500).json({message:"Server error-could not add card"+card_name})
-
     }
 })
